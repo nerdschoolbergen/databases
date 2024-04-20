@@ -11,10 +11,8 @@ Before you start, you need to install [Docker Desktop](https://www.docker.com/pr
 
 # Starting a Postgres server
 
-In order to start the server, we either have to install Postgres on our
-machine, or use a Docker image that contains Postgres. Today, we'll use a ready-made Docker image we found on the
-Internet that already
-contains a lot of data.
+In order to start the server, we either have to install Postgres on our machine, or use a Docker image that contains
+Postgres. Today, we'll use a ready-made Docker image we found on the Internet that already contains a lot of data.
 
 To start a Postgres Docker container, run the following command:
 
@@ -23,10 +21,8 @@ docker run -p 5432:5432 -e POSTGRES_PASSWORD=supersecret btholt/omdb-postgres
 ```
 
 This command will download the Postgres Docker image and fire up a container. The `-p` flag maps a TCP port on your
-local
-computer to a port on the container, and the `-e` flag sets an environment variable inside the container. The last
-argument
-is the name of the docker image we want to download and create a container from.
+local computer to a port on the container, and the `-e` flag sets an environment variable inside the container. The last
+argument is the name of the docker image we want to download and create a container from.
 
 The output will be something like this:
 
@@ -94,4 +90,27 @@ queries) and Procedures (code that runs inside the database). These are organize
 Databases.
 
 To find the tables in this database, navigate to `Nerdschool > Databases > omdb > Schemas > public > Tables`. You should
-find a list of tables with names such as `movies`, `casts` and `people`. 
+find a list of tables with names such as `movies`, `casts` and `people`. If you expand `movies > Columns` you'll see
+which columns the `movies` table contains. This is useful when writing queries.
+
+![Columns in movies table](movies-columns.png)
+
+# Exercise 3 - Your first query
+
+In SQL, basic queries typically follow this form:
+
+```postgresql
+select [columns]
+from [table]
+where [condition]
+```
+
+The `select` part is a comma separated list of columns from the table you want to retrieve. To get all columns, you can
+use `*` instead of the column names. The `from` part specifies which table you want to get data from. Lastly, `where` is
+used to filter which rows you want to retrieve. To get all rows, simply omit the `where` part.
+
+Task: Write a query that returns all rows and columns in the `movies` table. Browse the results and familiarize yourself
+with the contents of the table. 
+
+
+
