@@ -76,7 +76,7 @@ On the right, you'll se a Query window where you'll write your SQL statements. T
 to run it.
 
 ```postgresql
-select 'Hello, Postgres!'
+SELECT 'Hello, Postgres!'
 ```
 
 You should get this result:
@@ -97,12 +97,12 @@ which columns the `movies` table contains. This is useful when writing queries.
 
 # Exercise 3 - Your first query
 
-In SQL, basic queries typically follow this form:
+In SQL, basic queries follow this form:
 
 ```postgresql
-select [columns]
-from [table]
-where [condition]
+SELECT [columns]
+FROM [table]
+WHERE [condition]
 ```
 
 The `select` part is a comma separated list of columns from the table you want to retrieve. To get all columns, you can
@@ -110,7 +110,111 @@ use `*` instead of the column names. The `from` part specifies which table you w
 used to filter which rows you want to retrieve. To get all rows, simply omit the `where` part.
 
 Task: Write a query that returns all rows and columns in the `movies` table. Browse the results and familiarize yourself
-with the contents of the table. 
+with the contents of the table.
 
+# Exercise 4 - Selecting specific columns using `SELECT`
 
+Tables typically contain a lot of columns. If you only want to display a few of them in your app, it is wasteful to
+select all the columns. It also adds to the time it takes to transfer the data from the database server to your app.
 
+Task: Write a query that retrieves the name, date and kind of movies. Browse through the results and look at the
+different kinds.
+
+# Exercise 5 - Filtering results using `WHERE`
+
+It turns out the `movies` table contains not only movies, but also the names of series and their seasons, episodes of
+those series and even series of movies like "Home alone" 1, 2 and 3.
+
+Task: Write a query that retrieves all series.
+
+[Tutorial: The WHERE statement](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-where/)
+
+# Exercise 6 - Substring matching with `LIKE`
+
+There seems to be a lot of different Star Trek series, with different names such as 'Star Trek: The Next Generation'
+and 'Star Trek: Deep Space Nine'. To find all series that have the words 'Star Trek' in them, you can use the `LIKE`
+operator instead of the equals sign. This allows you to use wildcards in your queries. To match any sequence of
+characters, use the `%` sign, like this:
+
+```postgresql
+SELECT *
+FROM foo
+WHERE bar LIKE '%baz%'
+```
+
+Note that like is case sensitive. If you want to match text case insensitively, first convert the column to lower case
+like this:
+
+```postgresql
+SELECT *
+FROM foo
+WHERE lower(bar) LIKE '%baz%'
+```
+
+The conversion is done during query execution, and does not affect the stored data in the table.
+
+Task: Find all the different Star Trek series.
+
+[Tutorial: The LIKE operator](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-like/)
+
+# Exercise 7 - Sorting data using `ORDER BY`
+
+You may have noticed that the rows are returned in a seemingly random order. This is because we haven't specified which
+order we want them in, and Postgres simply returns them as it stumbles upon them. If you want the data in a particular
+order, you must use the `ORDER BY` statement. It has the following syntax:
+
+```postgresql
+SELECT *
+FROM foo
+ORDER BY bar ASC
+```
+
+The `ASC` part tells postgres that we want the results ordered by the value of the `bar` column in ascending order,
+which by the way is the default. If we want them in descending order instead, use `DESC`.
+
+Task: Sort the Star Trek series by date, first in ascending then in descending order.
+
+# Exercise 8 - Joining tables
+
+To avoid duplicating data, the name and birthday of actors and other cast is stored once in a table called `people`,
+and each time they appear in a movie, their id is linked to the movie in a table called `casts`. This avoids having
+to repeat the name and birthday of each person for every movie they appear in.
+
+If we want to find all the movies Patric Stuart has appeared in, we need to join the `casts` table with both
+the `movies` table and the `people` table. This is how they are connected:
+
+![Casts entity-relation diagram](casts-er-diagram.png)
+
+As we can see, each row in the `casts` table contains the `movie_id` and the `person_id` of the movies and people
+involved. Since more than one person is involved in the making of one movie, there are several rows in `casts` that have
+the same `movie_id`. Since a person may appear in several movies, there are also several rows in `casts` that have
+the same `person_id`.
+
+The arrows in the diagram point from the table that uses a key to the table that owns the key. When the `casts` table
+refers to a `movie`, it does so by creating a column called `movie_id` that points to the `id` of a specific `movie`.
+You can think of it as "One cast refers to one movie", and inversely, "One movie can be referred to by several casts".
+If we want to get a list of movie names and person names, we need to `JOIN` these tables using their id columns.
+
+In order not to reveal the answer to the task right away, imagine that a person may own several cars. The syntax for
+joining these two tables looks like this:
+
+```postgresql
+SELECT p.name, c.license_plate
+FROM person p
+         INNER JOIN car c ON c.owner_person_id = p.id
+```
+
+There are a couple of new concepts going on here. First, notice that we have given the table `person` an alias `p`. This
+is because it's shorter when we want to select the `name` of the `person` table, and when we use columns from
+the `person`
+table in the `JOIN` with `car`.
+
+The `INNER JOIN` part is where we tell Postgres how we want to connect the tables. In the example, if the
+`owner_person_id` column in a `car` row points to a the `id` column of a `person` row, we need to say that we want rows
+where these two ids are the same. That's what the `ON c.owner_person_id = p.id` means. If we didn't do that, we would
+get all `car` rows matched with every `person` row, regardless of who owns which car. As a rule, this is not what we
+want.
+
+Task: Write a query that finds all the people involved in the movie 'Star Trek Into Darkness'.
+
+[Tutorial: INNER JOIN](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-inner-join/)
