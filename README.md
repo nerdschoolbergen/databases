@@ -76,7 +76,7 @@ On the right, you'll se a Query window where you'll write your SQL statements. T
 to run it.
 
 ```postgresql
-SELECT 'Hello, Postgres!'
+SELECT 'Hello, Postgres!';
 ```
 
 You should get this result:
@@ -102,7 +102,7 @@ In SQL, basic queries follow this form:
 ```postgresql
 SELECT [columns]
 FROM [table]
-WHERE [condition]
+WHERE [condition];
 ```
 
 The `select` part is a comma separated list of columns from the table you want to retrieve. To get all columns, you can
@@ -129,7 +129,47 @@ Task: Write a query that retrieves all series.
 
 [Tutorial: The WHERE statement](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-where/)
 
-# Exercise 6 - Substring matching with `LIKE`
+# Exercise 6 - Inserting data with `INSERT`
+
+Retrieving data is fine, but how do you get the data into the database in the first place? That's where the `INSERT` 
+statement comes into play. The statement has the following syntax: 
+
+```postgresql
+INSERT INTO car(license_plate, model) 
+VALUES('AB 12345', 'Toyota Avensis');
+```
+
+Task: Insert your name into the `people` table. Make sure you select an `id` that's not already taken. Note that 
+dates have to be entered in `yyyy-mm-dd` format.
+
+
+# Exercise 7 - Updating data with `UPDATE`
+
+If you want to change a row that's already in the database, you need to use the `UPDATE` statement. The update statement
+has the following syntax:
+
+```postgresql
+UPDATE car 
+    SET model = 'Nissan Leaf'
+WHERE license_plate = 'AB 12345';
+```
+
+The `WHERE` part is very important. If you leave it out, the database will happily change every single row in the table. 
+
+Task: Try to change your name in the `people` table using the `id` you provided in the `WHERE` part. 
+
+# Exercise 8 - Deleting rows with `DELETE`
+
+To remove data from the database, you use the `DELETE` statement. The statement has the following syntax:  
+
+```postgresql
+DELETE FROM car
+WHERE license_plate = 'AB 12345';
+```
+
+Task: Delete yourself from the `people` table.
+
+# Exercise 9 - Substring matching with `LIKE`
 
 There seems to be a lot of different Star Trek series, with different names such as 'Star Trek: The Next Generation'
 and 'Star Trek: Deep Space Nine'. To find all series that have the words 'Star Trek' in them, you can use the `LIKE`
@@ -139,7 +179,7 @@ characters, use the `%` sign, like this:
 ```postgresql
 SELECT *
 FROM foo
-WHERE bar LIKE '%baz%'
+WHERE bar LIKE '%baz%';
 ```
 
 Note that like is case sensitive. If you want to match text case insensitively, first convert the column to lower case
@@ -148,7 +188,7 @@ like this:
 ```postgresql
 SELECT *
 FROM foo
-WHERE lower(bar) LIKE '%baz%'
+WHERE lower(bar) LIKE '%baz%';
 ```
 
 The conversion is done during query execution, and does not affect the stored data in the table.
@@ -157,7 +197,7 @@ Task: Find all the different Star Trek series.
 
 [Tutorial: The LIKE operator](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-like/)
 
-# Exercise 7 - Sorting data using `ORDER BY`
+# Exercise 10 - Sorting data using `ORDER BY`
 
 You may have noticed that the rows are returned in a seemingly random order. This is because we haven't specified which
 order we want them in, and Postgres simply returns them as it stumbles upon them. If you want the data in a particular
@@ -166,7 +206,7 @@ order, you must use the `ORDER BY` statement. It has the following syntax:
 ```postgresql
 SELECT *
 FROM foo
-ORDER BY bar ASC
+ORDER BY bar ASC;
 ```
 
 The `ASC` part tells postgres that we want the results ordered by the value of the `bar` column in ascending order,
@@ -174,7 +214,7 @@ which by the way is the default. If we want them in descending order instead, us
 
 Task: Sort the Star Trek series by date, first in ascending then in descending order.
 
-# Exercise 8 - Joining tables
+# Exercise 11 - Joining tables
 
 To avoid duplicating data, the name and birthday of actors and other cast is stored once in a table called `people`,
 and each time they appear in a movie, their id is linked to the movie in a table called `casts`. This avoids having
@@ -201,7 +241,7 @@ joining these two tables looks like this:
 ```postgresql
 SELECT p.name, c.license_plate
 FROM person p
-         INNER JOIN car c ON c.owner_person_id = p.id
+         INNER JOIN car c ON c.owner_person_id = p.id;
 ```
 
 There are a couple of new concepts going on here. First, notice that we have given the table `person` an alias `p`. This
@@ -218,3 +258,9 @@ want.
 Task: Write a query that finds all the people involved in the movie 'Star Trek Into Darkness'.
 
 [Tutorial: INNER JOIN](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-inner-join/)
+
+# Task 12 - Putting it all together
+
+The last task is to find the name and date of all movies where Patrick Stuart was an actor, ordered by the release date.
+
+
