@@ -1,0 +1,30 @@
+version: '3'
+services:
+  postgres:
+    image: btholt/omdb-postgres
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: supersecret
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 3s
+      timeout: 30s
+      retries: 10
+
+
+  pgadmin4:
+    image: dcagatay/pwless-pgadmin4:latest
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - 7777:80
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: supersecret
+      POSTGRES_HOST: "host.docker.internal"
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: "omdb"
+    restart: unless-stopped
