@@ -17,12 +17,10 @@ Postgres. Today, we'll use a ready-made Docker image we found on the Internet th
 To start a Postgres Docker container, run the following command:
 
 ```shell
-docker run -p 5432:5432 -e POSTGRES_PASSWORD=supersecret btholt/omdb-postgres
+docker compose up
 ```
 
-This command will download the Postgres Docker image and fire up a container. The `-p` flag maps a TCP port on your
-local computer to a port on the container, and the `-e` flag sets an environment variable inside the container. The last
-argument is the name of the docker image we want to download and create a container from.
+This command will download and start a container with our postgres database and a container with pgAdmin. 
 
 The output will be something like this:
 
@@ -40,12 +38,23 @@ PostgreSQL init process complete; ready for start up.
 + echo 'PostgreSQL init process complete; ready for start up.'
 + echo
 + exec postgres
-2024-04-20 16:41:31.933 UTC [1] LOG:  starting PostgreSQL 14.3 (Debian 14.3-1.pgdg110+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
-2024-04-20 16:41:31.933 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
-2024-04-20 16:41:31.933 UTC [1] LOG:  listening on IPv6 address "::", port 5432
-2024-04-20 16:41:31.936 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-2024-04-20 16:41:31.938 UTC [136] LOG:  database system was shut down at 2024-04-20 16:41:31 UTC
-2024-04-20 16:41:31.941 UTC [1] LOG:  database system is ready to accept connections
+2025-03-04 16:05:35.278 UTC [1] LOG:  starting PostgreSQL 14.3 (Debian 14.3-1.pgdg110+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+2025-03-04 16:05:35.278 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2025-03-04 16:05:35.278 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2025-03-04 16:05:35.280 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2025-03-04 16:05:35.282 UTC [165] LOG:  database system was shut down at 2025-03-04 16:05:35 UTC
+2025-03-04 16:05:35.284 UTC [1] LOG:  database system is ready to accept connections
+----------
+Loading servers with:
+User: pgadmin4@pgadmin.org
+SQLite pgAdmin config: /var/lib/pgadmin/pgadmin4.db
+----------
+Added 0 Server Group(s) and 1 Server(s).
+postfix/postlog: starting the Postfix mail system
+[2025-03-04 16:05:40 +0000] [1] [INFO] Starting gunicorn 22.0.0
+[2025-03-04 16:05:40 +0000] [1] [INFO] Listening at: http://[::]:80 (1)
+[2025-03-04 16:05:40 +0000] [1] [INFO] Using worker: gthread
+[2025-03-04 16:05:40 +0000] [133] [INFO] Booting worker with pid: 133
 ```
 
 Once you get to this point, you're ready to connect to the database.
