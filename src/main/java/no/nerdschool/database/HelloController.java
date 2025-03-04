@@ -21,7 +21,7 @@ public class HelloController {
     public ModelAndView sayHello() {
         return new ModelAndView("hello")
                 .addObject("name", "Børre")
-                .addObject("people", personRepository.findAll());
+                .addObject("people", personRepository.findByName("John"));
 
     }
 }

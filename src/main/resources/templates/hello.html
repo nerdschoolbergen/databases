@@ -6,8 +6,11 @@
 </head>
 <body>
 <p th:text="|Hello, ${name}!|"/>
-<ul th:each="person: ${people}">
-    <li th:text="${person.id} ${person.name}"/>
+<ul>
+    <li th:each="person: ${people}">
+        <span th:text="${person.id}"/>
+        <span th:text="${person.name}"/>
+    </li>
 </ul>
 
 </body>
