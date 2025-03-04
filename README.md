@@ -109,7 +109,7 @@ The `select` part is a comma separated list of columns from the table you want t
 use `*` instead of the column names. The `from` part specifies which table you want to get data from. Lastly, `where` is
 used to filter which rows you want to retrieve. To get all rows, simply omit the `where` part.
 
-Task: Write a query that returns all rows and columns in the `movies` table. Browse the results and familiarize yourself
+:pencil2: Write a query that returns all rows and columns in the `movies` table. Browse the results and familiarize yourself
 with the contents of the table.
 
 # Exercise 4 - Selecting specific columns using `SELECT`
@@ -117,7 +117,7 @@ with the contents of the table.
 Tables typically contain a lot of columns. If you only want to display a few of them in your app, it is wasteful to
 select all the columns. It also adds to the time it takes to transfer the data from the database server to your app.
 
-Task: Write a query that retrieves the name, date and kind of movies. Browse through the results and look at the
+:pencil2: Write a query that retrieves the name, date and kind of movies. Browse through the results and look at the
 different kinds.
 
 # Exercise 5 - Filtering results using `WHERE`
@@ -125,7 +125,7 @@ different kinds.
 It turns out the `movies` table contains not only movies, but also the names of series and their seasons, episodes of
 those series and even series of movies like "Home alone" 1, 2 and 3.
 
-Task: Write a query that retrieves all series.
+:pencil2: Write a query that retrieves all series.
 
 [Tutorial: The WHERE statement](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-where/)
 
@@ -139,7 +139,7 @@ INSERT INTO car(license_plate, model)
 VALUES('AB 12345', 'Toyota Avensis');
 ```
 
-Task: Insert your name into the `people` table. Make sure you select an `id` that's not already taken. Note that 
+:pencil2: Insert your name into the `people` table. Make sure you select an `id` that's not already taken. Note that 
 dates have to be entered in `yyyy-mm-dd` format.
 
 
@@ -156,7 +156,7 @@ WHERE license_plate = 'AB 12345';
 
 The `WHERE` part is very important. If you leave it out, the database will happily change every single row in the table. 
 
-Task: Try to change your name in the `people` table using the `id` you provided in the `WHERE` part. 
+:pencil2: Try to change your name in the `people` table using the `id` you provided in the `WHERE` part. 
 
 # Exercise 8 - Deleting rows with `DELETE`
 
@@ -167,7 +167,7 @@ DELETE FROM car
 WHERE license_plate = 'AB 12345';
 ```
 
-Task: Delete yourself from the `people` table.
+:pencil2: Delete yourself from the `people` table.
 
 # Exercise 9 - Substring matching with `LIKE`
 
@@ -193,7 +193,7 @@ WHERE lower(bar) LIKE '%baz%';
 
 The conversion is done during query execution, and does not affect the stored data in the table.
 
-Task: Find all the different Star Trek series.
+:pencil2: Find all the different Star Trek series.
 
 [Tutorial: The LIKE operator](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-like/)
 
@@ -212,7 +212,7 @@ ORDER BY bar ASC;
 The `ASC` part tells postgres that we want the results ordered by the value of the `bar` column in ascending order,
 which by the way is the default. If we want them in descending order instead, use `DESC`.
 
-Task: Sort the Star Trek series by date, first in ascending then in descending order.
+:pencil2: Sort the Star Trek series by date, first in ascending then in descending order.
 
 # Exercise 11 - Joining tables
 
@@ -255,7 +255,7 @@ where these two ids are the same. That's what the `ON c.owner_person_id = p.id` 
 get all `car` rows matched with every `person` row, regardless of who owns which car. As a rule, this is not what we
 want.
 
-Task: Write a query that finds all the people involved in the movie 'Star Trek Into Darkness'.
+:pencil2: Write a query that finds all the people involved in the movie 'Star Trek Into Darkness'.
 
 [Tutorial: INNER JOIN](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-inner-join/)
 
