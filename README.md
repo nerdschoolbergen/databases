@@ -6,8 +6,7 @@ that need to access data in the database.
 
 # Prerequisites
 
-Before you start, you need to install [Docker Desktop](https://www.docker.com/products/docker-desktop/) and
-[pgAdmin](https://www.pgadmin.org/).
+Before you start, you need to install [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
 # Starting a Postgres server
 
@@ -61,21 +60,12 @@ Once you get to this point, you're ready to connect to the database.
 
 # Exercise 1 - Hello Postgres
 
-To connect to Postgres and start running queries, we need a database management tool like pgAdmin. When you first run
-pgadmin, it looks something like this:
+To connect to Postgres and start running queries, we have provided a database management tool called pgAdmin. 
+It's running on your computer at http://localhost:7777
+
 
 ![pgAdmin](pgadmin-welcome-screen.png)
 
-At first, pgAdmin doesn't know about the server we started up earlier, so we need to tell it. Select "Add new server",
-and fill in these values:
-
-- General > Name: `Nerdschool`
-- Connection > Hostname/address: `127.0.0.1`
-- Connection > Port: `5432`
-- Connection > Maintenance database: `omdb`
-- Connection > Username: `postgres`
-- Connection > Password: `supersecret` (see environment variable `POSTGRES_PASSWORD` above)
-- Connection > Save password: `yes`
 
 Select save, and you should see the Nerdschool database in the left pane. Right click `omdb` and select `Query tool`.
 
@@ -91,6 +81,18 @@ SELECT 'Hello, Postgres!';
 You should get this result:
 
 ![Hello, Postgres!](hello-postgres.png)
+
+
+## Using another query tool 
+If you want to use another query tool, for instance the one provided in IntelliJ, these are the connection properties:
+
+- Hostname/address: `127.0.0.1`
+- Port: `5432`
+- Authentication: Username/password
+- Database: `omdb`
+- Username: `postgres`
+- Password: `supersecret`
+- URL: jdbc:postgresql://localhost:5432/omdb?user=postgres&password=supersecret
 
 # Exercise 2 - Browsing the schema
 
