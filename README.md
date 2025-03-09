@@ -206,6 +206,15 @@ The conversion is done during query execution, and does not affect the stored da
 
 :pencil2: Find all the different Star Trek series.
 
+Wildcards (`%`) can also be used in between words in your filter, to let you find values that start and end with given values:
+
+```postgresql
+SELECT *
+FROM foo
+WHERE bar LIKE 'baz%zoo';
+```
+:pencil2: Find how many people have John as their first name, and Scott as their last name. 
+
 [Tutorial: The LIKE operator](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-like/)
 
 # Exercise 10 - Sorting data using `ORDER BY`
