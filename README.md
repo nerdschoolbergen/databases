@@ -283,4 +283,3 @@ want.
 
 The last task is to find the name and date of all movies where Patrick Stuart was an actor, ordered by the release date.
 
-
