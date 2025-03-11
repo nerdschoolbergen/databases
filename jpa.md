@@ -19,3 +19,15 @@ by the `MovieController` class, which in turn uses `MovieRepository` to query th
 
 # Exercise 2 - Show the director
 
+:pencil2: Add another column to the table, showing the director of the movie.
+
+<details>
+  <summary>Hint</summary>
+
+  You may want to add a `getDirector()` method on `Movie` that iterates through the `Casts` to find a
+  person whose job name was "Director".
+</details>
+
+
+# Excercise 3 - Show details about a director
+

@@ -1,11 +1,10 @@
 package no.nerdschool.database.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "movies")
@@ -22,6 +21,8 @@ public class Movie {
     @Column
     private LocalDate date;
 
+    @OneToMany(mappedBy = "movie")
+    private List<Cast> casts = new ArrayList<>();
 
     public void setId(Long id) {
         this.id = id;
@@ -53,5 +54,14 @@ public class Movie {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public Person getDirector() {
+        for (Cast cast : casts) {
+            if (cast.getJob().getName().equals("Director")) {
+                return cast.getPerson();
+            }
+        }
+        return null;
     }
 }
