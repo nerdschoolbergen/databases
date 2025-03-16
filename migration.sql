@@ -14,3 +14,9 @@ alter table people_aliases
 alter table people_aliases
     ADD COLUMN id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY;
 
+alter table people_links
+    drop constraint people_links_pkey;
+
+alter table people_links
+    ADD COLUMN id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY;
+

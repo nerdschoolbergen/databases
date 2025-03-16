@@ -9,21 +9,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/person")
-public class PersonController {
+@RequestMapping("/directors")
+public class DirectorsController {
 
 
     private final PersonRepository personRepository;
 
-    public PersonController(PersonRepository personRepository) {
+    public DirectorsController(PersonRepository personRepository) {
         this.personRepository = personRepository;
+    }
+
+    @GetMapping
+    public ModelAndView index() {
+        return new ModelAndView("/directors/director-list")
+                .addObject("directors", personRepository.findAllDirectors());
     }
 
     @GetMapping("{id}")
     public ModelAndView show(@PathVariable Long id) {
-        Person person = personRepository.findById(id).get();
+        Person director = personRepository.findById(id).get();
 
-        return new ModelAndView("person")
-                .addObject("person", person);
+        return new ModelAndView("/directors/director")
+                .addObject("director", director);
     }
 }

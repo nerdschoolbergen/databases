@@ -17,7 +17,7 @@ public class MoviesController {
 
     @GetMapping
     public ModelAndView sayHello() {
-        return new ModelAndView("movies")
+        return new ModelAndView("movies/movie-list")
                 .addObject("movies", movieRepository.findMoviesWhereNameLike("star wars"));
 
     }
