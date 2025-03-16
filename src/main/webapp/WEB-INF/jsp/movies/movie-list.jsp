@@ -7,7 +7,6 @@
 
     <table class="table table-striped">
         <thead>
-
         <tr>
             <th>Id</th>
             <th>Name</th>
@@ -18,10 +17,9 @@
         </thead>
         <tbody>
         <c:forEach var="movie" items="${movies}">
-
             <tr>
-                <td>${movie.id}</td>
-                <td>${movie.name}</td>
+                <td><a href="/movies/${movie.id}">${movie.id}</a></td>
+                <td><a href="/movies/${movie.id}">${movie.name}</a></td>
                 <td>${movie.runtime}</td>
                 <td>${movie.date}</td>
                 <td>
@@ -30,7 +28,6 @@
                     </a>
                 </td>
             </tr>
-
         </c:forEach>
         </tbody>
     </table>

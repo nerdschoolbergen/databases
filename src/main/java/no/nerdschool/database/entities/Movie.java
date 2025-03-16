@@ -56,6 +56,10 @@ public class Movie {
         this.date = date;
     }
 
+    public List<Cast> getCasts() {
+        return casts;
+    }
+
     public Person getDirector() {
         for (Cast cast : casts) {
             if (cast.getJob().getName().equals("Director")) {

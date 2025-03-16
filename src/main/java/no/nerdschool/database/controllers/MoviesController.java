@@ -3,6 +3,7 @@ package no.nerdschool.database.controllers;
 import no.nerdschool.database.repositories.MovieRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,9 +17,14 @@ public class MoviesController {
     }
 
     @GetMapping
-    public ModelAndView sayHello() {
+    public ModelAndView list() {
         return new ModelAndView("movies/movie-list")
                 .addObject("movies", movieRepository.findMoviesWhereNameLike("star wars"));
+    }
 
+    @GetMapping("{id}")
+    public ModelAndView show(@PathVariable Long id) {
+        return new ModelAndView("movies/movie")
+                .addObject("movie", movieRepository.findById(id).orElseThrow());
     }
 }

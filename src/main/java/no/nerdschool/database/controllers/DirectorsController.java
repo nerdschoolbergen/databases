@@ -20,7 +20,7 @@ public class DirectorsController {
     }
 
     @GetMapping
-    public ModelAndView index() {
+    public ModelAndView list() {
         return new ModelAndView("/directors/director-list")
                 .addObject("directors", personRepository.findAllDirectors());
     }
