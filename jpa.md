@@ -11,11 +11,20 @@ After you've made changes, you must restart the project. If you use IntelliJ, si
 
 # Exercise 1 - List all the Star Wars movies
 
-If you visit http://localhost:8080 you should see a list of movies released in may 1985. This list is generated
+If you visit http://localhost:8080 you should see a list of movies released in march 1999. This list is generated
 by the `MovieController` class, which in turn uses `MovieRepository` to query the database.
 
-:pencil2: Change the method `MovieRepository.findMovies()` so that it returns all the Star Wars movies. You can use
-the `LIKE` keyword and the `%` wildcard to match parts of a string.
+:pencil2: Change the method `MovieRepository.findMovies()` so that it returns all the Star Wars movies.
+
+<details>
+<summary>Hint</summary>
+
+You can use
+the `LIKE` keyword and the `%` wildcard to match parts of a string. Note that `LIKE` is case sensitive. There
+is a Postgres specific keyword called `ILIKE` which does a case-insensitive comparison. This is not part of the
+SQL standard, so it is not supported by all databases. The standard approach is to use
+`lower (m.name) LIKE %something%`
+</details>
 
 # Exercise 2 - Link to homepage
 
@@ -23,19 +32,27 @@ In the `movies` table, you'll find a column called `homepage`, but there is no c
 the `Movie` java class.
 
 :pencil2: Add a `homepage` field to the `Movie` java class and display a link to the homepage of the movie
-in `movie-list.jsp`.
+in `movie-list.jsp`. Note: not all movies have a homepage.
 
 # Exercise 3 - Link to movie details
 
 We want to be able to click on a movie in the list and display more details about that movie. There should be
 a separate page for movie details, and that page needs its own URL. It is common practice to use the id (or
 other unique property) of the database row to create a unique URL. The URL for the movies page is
-http://localhost:8080/movies, so it would be natural to use http://lcoalhost:8080/movies/11 for a movie with
+http://localhost:8080/movies, so it would be natural to use http://localhost:8080/movies/11 for a movie with
 id = 11.
 
 :pencil2: Create a link to the details page for each movie in `movie-list.jsp`. Then, in `MoviesController.show()`,
 use the `id` parameter to look up the correct movie from the `MovieRepository` and pass it along to the
 `ModelAndView`.
+
+<details>
+<summary>
+Hint: 
+</summary>
+
+The syntax for linking to a page on the same host is `<a href="/movies/${movie.id}">${movie.name}</a>`
+</details>
 
 # Exercise 4 - Show the cast of a movie
 
@@ -58,15 +75,17 @@ Example: A relationship between cars and their owners
 class Person {
   @Id
   Long id;
-  @OneToMany(mappedBy = "owner")
+  
+  @OneToMany(mappedBy = "owner") //refers to the java property name "owner" in the Car class
   List<Car> cars;
 }
 
 class Car {
   @Id
   Long id;
+  
   @ManyToOne
-  @JoinColumn("owner_person_id")
+  @JoinColumn("owner_person_id") //refers to the database column "owner_person_id" in the table "car"
   Person owner;
 }
 ```
@@ -79,6 +98,16 @@ side of the relationship. On the other hand, one `Car` can only have a single `P
 `Person` and `Cast` classes and the `Job` and `Cast` classes. Try out the movie detail page and you should see the
 cast of the movie.
 
+<details>
+<summary>Hint:</summary>
+
+In this database, the relationship between movie and casts is a one-to-many relationship. One movie is related to several casts.
+And inversely the relation between casts and movie is a many-to-one relation.
+
+Casts also have a many-to-one relation to job and person
+
+</details>
+
 # Exercise 4 - Show the director
 
 You should now have a property `List<Cast> casts` in the `Movie` class. One of the cast in that list has a `Job`
@@ -87,14 +116,12 @@ with the name `"Director"`.
 :pencil2: Implement the `getDirector()` method in `Movie` so that it returns the `Person` who was the director.
 Then, display the name of that person in the `movies-list` page in the "Director" column.
 
-# Excercise 5 - Show details about a director
-
 Now that you have the director of a movie, you can create a link to a page that shows more details about that person.
 The URL should be http://localhost:8080/directors/1 for a person with id=1.
 
 :pencil2: Add a link to the detail page of a director on the `movies-list` page.
 
-# Exercise 6 - Show a list of movies a person has directed
+# Exercise 5 - Show a list of movies a person has directed
 
 You can navigate the `casts` relationship the other way, too. In `Person` there is a method called
 `getMoviesDirected()`.
@@ -102,7 +129,7 @@ You can navigate the `casts` relationship the other way, too. In `Person` there 
 :pencil2: Implement the `Person.getMoviesDirected()` method by iterating through person's `casts` list and returning a
 list of movies where the person was the director. Then, display the list of movies on the director's detail page.
 
-# Exercise 7 - Show a list of directors
+# Exercise 6 - Show a list of directors
 
 You've tried iterating through a list of cast to find directors, but in order to find all directors in this
 manner, you would have to iterate through all people (or all movies) and looking at all their cast. This is a

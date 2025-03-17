@@ -1,9 +1,12 @@
 package no.nerdschool.database.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -20,12 +23,6 @@ public class Movie {
 
     @Column
     private LocalDate date;
-
-    @OneToMany(mappedBy = "movie")
-    private List<Cast> casts = new ArrayList<>();
-
-    @Column
-    private String homepage;
 
     public void setId(Long id) {
         this.id = id;
@@ -60,22 +57,17 @@ public class Movie {
     }
 
     public List<Cast> getCasts() {
-        return casts;
+        //TODO: Return the casts property
+        return Collections.emptyList();
     }
 
     public Person getDirector() {
         return null;
     }
 
-    public void setCasts(List<Cast> casts) {
-        this.casts = casts;
-    }
-
     public String getHomepage() {
-        return homepage;
+        //TODO: Return the homepage property
+        return null;
     }
 
-    public void setHomepage(String homepage) {
-        this.homepage = homepage;
-    }
 }

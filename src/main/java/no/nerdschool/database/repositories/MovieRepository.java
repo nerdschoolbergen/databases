@@ -17,14 +17,5 @@ public interface MovieRepository extends CrudRepository<Movie, Long> {
             and m.kind = 'movie'
             order by m.date desc
             """)
-    List<Movie> findMovies2();
-    @NativeQuery("""
-            select *
-            from movies m
-            where lower(m.name) like '%star wars%'
-            and m.kind = 'movie'
-            order by m.date desc
-            """)
     List<Movie> findMovies();
-
 }

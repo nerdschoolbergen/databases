@@ -23,9 +23,6 @@ public class Person {
     @OneToMany(mappedBy = "person")
     private List<PersonLink> links = new ArrayList<>();
 
-    @OneToMany(mappedBy = "person")
-    private List<Cast> casts = new ArrayList<>();
-
     public void setId(Long id) {
         this.id = id;
     }

@@ -31,6 +31,8 @@ public class MoviesController {
         movie.setName("Placeholder Movie");
         movie.setId(42L);
 
+        movie = movieRepository.findById(id).orElseThrow();
+
         return new ModelAndView("movies/movie")
                 .addObject("movie", movie);
     }

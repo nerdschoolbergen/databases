@@ -8,24 +8,12 @@ public class Cast {
     @Id
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "movie_id")
-    private Movie movie;
-
-    @ManyToOne
-    @JoinColumn(name = "person_id")
-    private Person person;
-
-    @ManyToOne
-    @JoinColumn(name = "job_id")
-    private Job job;
 
     @Column
     private String role;
 
     @Column
     private int position;
-
 
     public Long getId() {
         return id;
@@ -36,27 +24,18 @@ public class Cast {
     }
 
     public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
+        //TODO: Return the movie property
+        return null;
     }
 
     public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
+        //TODO: Return the person property
+        return null;
     }
 
     public Job getJob() {
-        return job;
-    }
-
-    public void setJob(Job job) {
-        this.job = job;
+        //TODO: Return the job property
+        return null;
     }
 
     public String getRole() {
