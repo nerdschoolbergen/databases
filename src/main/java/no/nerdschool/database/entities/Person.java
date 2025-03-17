@@ -5,6 +5,7 @@ import no.nerdschool.database.utils.WikidataClient;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -57,13 +58,8 @@ public class Person {
     }
 
     public List<Movie> getMoviesDirected() {
-        List<Movie> results = new ArrayList<>();
-        for (Cast cast : casts) {
-            if(cast.getJob().getName().equals("Director")) {
-                results.add(cast.getMovie());
-            }
-        }
-        return results;
+        //TODO: use the casts collection to find a list of movies directed by this person
+        return Collections.emptyList();
     }
 
     public String getImage() {

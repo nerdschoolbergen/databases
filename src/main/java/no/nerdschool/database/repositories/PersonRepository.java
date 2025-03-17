@@ -21,10 +21,7 @@ public interface PersonRepository extends CrudRepository<Person, Long > {
 
     @NativeQuery("""
             select distinct p.* from people p
-            inner join casts c on p.id = c.person_id
-            inner join jobs j on c.job_id = j.id
-            where j.name='Director'
-            limit 100
+            where id = 1
             """)
     List<Person> findAllDirectors();
 }

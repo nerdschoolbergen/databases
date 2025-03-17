@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <tags:layout>
 
@@ -20,6 +21,7 @@
             <tr>
                 <td><a href="/movies/${movie.id}">${movie.id}</a></td>
                 <td><a href="/movies/${movie.id}">${movie.name}</a></td>
+                <td>${movie.homepage}</td>
                 <td>${movie.runtime}</td>
                 <td>${movie.date}</td>
                 <td>

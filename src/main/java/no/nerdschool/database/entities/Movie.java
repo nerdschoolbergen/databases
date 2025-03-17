@@ -24,6 +24,9 @@ public class Movie {
     @OneToMany(mappedBy = "movie")
     private List<Cast> casts = new ArrayList<>();
 
+    @Column
+    private String homepage;
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -61,11 +64,18 @@ public class Movie {
     }
 
     public Person getDirector() {
-        for (Cast cast : casts) {
-            if (cast.getJob().getName().equals("Director")) {
-                return cast.getPerson();
-            }
-        }
         return null;
+    }
+
+    public void setCasts(List<Cast> casts) {
+        this.casts = casts;
+    }
+
+    public String getHomepage() {
+        return homepage;
+    }
+
+    public void setHomepage(String homepage) {
+        this.homepage = homepage;
     }
 }
