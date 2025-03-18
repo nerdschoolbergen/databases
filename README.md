@@ -1,8 +1,14 @@
 # Java Persistence API
 
+To get started, you first need to clone the git repository to your local computer. The commands below assume that 
+you have started a terminal and navigated to the directory where the git repository is checked out. 
+
 To run the project: 
 
 ```shell
+
+docker compose up
+
 mvn clean spring-boot:run 
 ```
 
