@@ -1,14 +1,119 @@
 # Java Persistence API
 
+In this workshop, we'll be working with the open source database management system called Postgres. Postgres is a server
+that runs on a computer and listens for connections from clients such as our query tool or any programs we write
+that need to access data in the database.
+
+# Prerequisites
+
+Before you start, you need to install [Docker Desktop](https://www.docker.com/products/docker-desktop/) and [maven](https://maven.apache.org). Then, clone the 
+git repository to a directory on your own computer. Start a terminal and navigate to this directory.
+
+# Starting a Postgres server
+
+In order to start the server, we either have to install Postgres on our machine, or use a Docker image that contains
+Postgres. Today, we'll use a ready-made Docker image we found on the Internet that already contains a lot of data.
+
+To start a Postgres Docker container, run the following command:
+
+```shell
+docker compose up
+```
+
+This command will download and start a container with our postgres database and a container with pgAdmin.
+
+The output will be something like this:
+
+``` 
+Unable to find image 'btholt/omdb-postgres:latest' locally
+latest: Pulling from btholt/omdb-postgres
+dc1f00a5d701: Pull complete
+3bb4b34c334c: Pull complete
+4739db3ff30d: Pull complete
+67627067cf92: Pull complete
+8cb1fcaf0443: Pull complete
+...
+PostgreSQL init process complete; ready for start up.
+
++ echo 'PostgreSQL init process complete; ready for start up.'
++ echo
++ exec postgres
+2025-03-04 16:05:35.278 UTC [1] LOG:  starting PostgreSQL 14.3 (Debian 14.3-1.pgdg110+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+2025-03-04 16:05:35.278 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2025-03-04 16:05:35.278 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2025-03-04 16:05:35.280 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2025-03-04 16:05:35.282 UTC [165] LOG:  database system was shut down at 2025-03-04 16:05:35 UTC
+2025-03-04 16:05:35.284 UTC [1] LOG:  database system is ready to accept connections
+----------
+Loading servers with:
+User: pgadmin4@pgadmin.org
+SQLite pgAdmin config: /var/lib/pgadmin/pgadmin4.db
+----------
+Added 0 Server Group(s) and 1 Server(s).
+postfix/postlog: starting the Postfix mail system
+[2025-03-04 16:05:40 +0000] [1] [INFO] Starting gunicorn 22.0.0
+[2025-03-04 16:05:40 +0000] [1] [INFO] Listening at: http://[::]:80 (1)
+[2025-03-04 16:05:40 +0000] [1] [INFO] Using worker: gthread
+[2025-03-04 16:05:40 +0000] [133] [INFO] Booting worker with pid: 133
+```
+
+Once you get to this point, you're ready to connect to the database.
+
+# Exercise 1 - Hello Postgres
+
+To connect to Postgres and start running queries, we have provided a database management tool called pgAdmin.
+It's running on your computer at http://localhost:7777
+
+
+![pgAdmin](pgadmin-welcome-screen.png)
+
+
+Select save, and you should see the Nerdschool database in the left pane. Right click `omdb` and select `Query tool`.
+
+![Query tool](query-tool.png)
+
+On the right, you'll se a Query window where you'll write your SQL statements. Type in the following query and press F5
+to run it.
+
+```postgresql
+SELECT 'Hello, Postgres!';
+```
+
+You should get this result:
+
+![Hello, Postgres!](hello-postgres.png)
+
+
+## Using another query tool
+If you want to use another query tool, for instance the one provided in IntelliJ, these are the connection properties:
+
+- Hostname/address: `127.0.0.1`
+- Port: `5432`
+- Authentication: Username/password
+- Database: `omdb`
+- Username: `postgres`
+- Password: `supersecret`
+- URL: jdbc:postgresql://localhost:5432/omdb?user=postgres&password=supersecret
+
+# Exercise 2 - Browsing the schema
+
+A database server such as Postgres contains objects such as Tables (places to store data), Views (stored, named
+queries) and Procedures (code that runs inside the database). These are organized in Schemas, and at the top level,
+Databases.
+
+To find the tables in this database, navigate to `Nerdschool > Databases > omdb > Schemas > public > Tables`. You should
+find a list of tables with names such as `movies`, `casts` and `people`. If you expand `movies > Columns` you'll see
+which columns the `movies` table contains. This is useful when writing queries.
+
+![Columns in movies table](movies-columns.png)
+
 To get started, you first need to clone the git repository to your local computer. The commands below assume that 
 you have started a terminal and navigated to the directory where the git repository is checked out. 
 
+# Running the project
 To run the project: 
 
 ```shell
-
-docker compose up
-
 mvn clean spring-boot:run 
 ```
 
