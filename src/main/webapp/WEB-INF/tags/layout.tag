@@ -1,4 +1,3 @@
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ tag pageEncoding="utf-8" %>
 <!DOCTYPE HTML>
 <html>
@@ -6,8 +5,6 @@
     <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
