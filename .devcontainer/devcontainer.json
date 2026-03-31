@@ -13,8 +13,8 @@
   "forwardPorts": [5432, 7777, 8080],
   "portsAttributes": {
     "5432": { "label": "PostgreSQL" },
-    "7777": { "label": "pgAdmin" },
-    "8080": { "label": "Spring Boot App" }
+    "7777": { "label": "pgAdmin", "visibility": "public" },
+    "8080": { "label": "Spring Boot App", "visibility": "public" }
   },
   "remoteUser": "vscode",
   "postStartCommand": "docker run --privileged --rm tonistiigi/binfmt --install arm64 2>/dev/null || true",
