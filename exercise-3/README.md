@@ -19,7 +19,22 @@ VALUES('AB 12345', 'Toyota Avensis');
 
 :pencil2: Insert your name into the `people` table. Make sure you select an `id` that's not already taken.
 
-> :exclamation: Dates have to be entered in `yyyy-mm-dd` format.
+<details>
+<summary>Hint</summary>
+
+The `people` table has the required columns `id` and `name`. You need to specify both of them in the `INSERT` statement.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```postgresql
+INSERT INTO people(id, name)
+VALUES(9999999, 'Your Name');
+```
+
+</details>
 
 ## 3.2 Updating data with `UPDATE`
 
@@ -35,6 +50,24 @@ WHERE license_plate = 'AB 12345';
 
 :pencil2: Change your name in the `people` table using the `id` you provided in the `WHERE` part.
 
+<details>
+<summary>Hint</summary>
+
+Use `SET name = '...'` and make sure to include `WHERE id = ...` with the id you used in 3.1.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```postgresql
+UPDATE people
+    SET name = 'New Name'
+WHERE id = 9999999;
+```
+
+</details>
+
 ## 3.3 Deleting rows with `DELETE`
 
 :book: To remove data from the database, you use the `DELETE` statement:
@@ -45,5 +78,22 @@ WHERE license_plate = 'AB 12345';
 ```
 
 :pencil2: Delete yourself from the `people` table.
+
+<details>
+<summary>Hint</summary>
+
+Use `DELETE FROM people WHERE id = ...` with the id you used when inserting.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```postgresql
+DELETE FROM people
+WHERE id = 9999999;
+```
+
+</details>
 
 ### [Go to exercise 4 :arrow_right:](../exercise-4/README.md)

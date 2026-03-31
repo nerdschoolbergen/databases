@@ -30,6 +30,25 @@ The conversion is done during query execution, and does not affect the stored da
 
 :pencil2: Find all the different Star Trek series.
 
+<details>
+<summary>Hint</summary>
+
+Combine `LIKE` with a `WHERE` filter on `kind` to find only series. Use `%Star Trek%` to match any name containing "Star Trek".
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```postgresql
+SELECT *
+FROM movies
+WHERE kind = 'series'
+  AND name LIKE '%Star Trek%';
+```
+
+</details>
+
 :book: Wildcards (`%`) can also be used in between words in your filter, to let you find values that start and end with given values:
 
 ```postgresql
@@ -39,6 +58,24 @@ WHERE bar LIKE 'baz%zoo';
 ```
 
 :pencil2: Find how many people have John as their first name, and Scott as their last name.
+
+<details>
+<summary>Hint</summary>
+
+Use `LIKE 'John%Scott'` to match names that start with "John" and end with "Scott", with anything in between.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```postgresql
+SELECT *
+FROM people
+WHERE name LIKE 'John%Scott';
+```
+
+</details>
 
 :bulb: [Tutorial: The LIKE operator](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-like/)
 
@@ -55,5 +92,34 @@ ORDER BY bar ASC;
 The `ASC` part tells Postgres that we want the results ordered by the value of the `bar` column in ascending order, which by the way is the default. If we want them in descending order instead, use `DESC`.
 
 :pencil2: Sort the Star Trek series by date, first in ascending then in descending order.
+
+<details>
+<summary>Hint</summary>
+
+Take your query from the Star Trek task above and add `ORDER BY date ASC` at the end. Then try changing `ASC` to `DESC`.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+Ascending order: 
+
+```postgresql
+SELECT *
+FROM movies
+WHERE kind = 'series'
+  AND name LIKE '%Star Trek%'
+ORDER BY date ASC;
+```
+Descending order:
+```postgresql
+SELECT *
+FROM movies
+WHERE kind = 'series'
+  AND name LIKE '%Star Trek%'
+ORDER BY date DESC;
+```
+
+</details>
 
 ### [Go to exercise 5 :arrow_right:](../exercise-5/README.md)
