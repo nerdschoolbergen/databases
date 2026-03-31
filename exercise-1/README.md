@@ -13,6 +13,8 @@ You will learn to:
 
 > **Before you begin**: Please make sure that you have the following installed:
 
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [Maven](https://maven.apache.org) (for the JPA exercises)
 - IntelliJ Community Edition: [IntelliJ Community Edition](https://www.jetbrains.com/idea/download/)
 - JDK Development Kit (JDK 17 or later): [Java SE Development Kit](https://www.oracle.com/java/technologies/downloads/)
 - Alternative dev kit (Java 17 or later): [Eclipse Temurin Java Development Kit](https://adoptium.net/)
