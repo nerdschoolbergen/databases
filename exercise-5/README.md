@@ -36,12 +36,51 @@ The `INNER JOIN` part is where we tell Postgres how we want to connect the table
 
 :pencil2: Write a query that finds all the people involved in the movie 'Star Trek Into Darkness'.
 
+<details>
+<summary>Hint</summary>
+
+You need to join three tables: `people`, `casts`, and `movies`. Join `casts` to `people` using `person_id`, and `casts` to `movies` using `movie_id`. Then filter with `WHERE m.name = 'Star Trek Into Darkness'`.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```postgresql
+SELECT p.name, c.role
+FROM people p
+         INNER JOIN casts c ON c.person_id = p.id
+         INNER JOIN movies m ON m.id = c.movie_id
+WHERE m.name = 'Star Trek Into Darkness';
+```
+
+</details>
+
 :bulb: [Tutorial: INNER JOIN](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-inner-join/)
 
 ## 5.2 Putting it all together
 
 :pencil2: Write a query that finds the name and date of all movies where Patrick Stewart was an actor, ordered by the release date.
 
-> :bulb: This requires joining `movies`, `casts`, and `people`, filtering by person name, and ordering by date.
+<details>
+<summary>Hint</summary>
+
+Reuse the same three-table join from 5.1, but this time filter by `p.name` instead of `m.name`, and add `ORDER BY m.date`.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```postgresql
+SELECT m.name, m.date
+FROM movies m
+         INNER JOIN casts c ON c.movie_id = m.id
+         INNER JOIN people p ON p.id = c.person_id
+WHERE p.name = 'Patrick Stewart'
+ORDER BY m.date;
+```
+
+</details>
 
 ### [Go to exercise 6 :arrow_right:](../exercise-6/README.md)
