@@ -28,4 +28,6 @@ services:
       POSTGRES_HOST: "host.docker.internal"
       POSTGRES_PORT: "5432"
       POSTGRES_DB: "omdb"
+      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: "False"
+      PGADMIN_CONFIG_WTF_CSRF_ENABLED: "False"
     restart: unless-stopped
