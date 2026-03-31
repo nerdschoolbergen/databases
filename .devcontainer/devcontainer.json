@@ -17,6 +17,7 @@
     "8080": { "label": "Spring Boot App" }
   },
   "remoteUser": "vscode",
+  "postStartCommand": "docker run --privileged --rm tonistiigi/binfmt --install arm64 2>/dev/null || true",
   "postCreateCommand": "mvn dependency:resolve",
   "customizations": {
     "vscode": {
