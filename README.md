@@ -2,6 +2,8 @@
 
 In this workshop, we'll learn SQL fundamentals and how to use the Java Persistence API (JPA) to interact with a PostgreSQL database from a Spring Boot application. We'll be working with PostgreSQL — an open source database server pre-loaded with movie data.
 
+## [Open presentation slides](https://docs.google.com/presentation/d/1e1GuW5EXv9BrOSzolLabKaQC_UgDJC4Isi3bj4e7qdo/edit?usp=sharing)
+
 ## Focus of this lesson
 
 The first part focuses on learning SQL through hands-on exercises. The second part introduces JPA and Spring Data to query the same database from a Java web application.
