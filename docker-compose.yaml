@@ -1,6 +1,8 @@
 services:
   postgres:
-    image: btholt/omdb-postgres
+    build:
+      context: ./db
+      dockerfile: Dockerfile
     restart: always
     ports:
       - '5432:5432'
